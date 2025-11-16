@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: auth-service
+
+  security:
+    user:
+      name: admin
+      password: admin
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/{DB_NAME}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: {DB_USERNAME}
+    password: {DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:validate}
+    show-sql: ${SHOW_SQL:false}
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          batch_size: 10
+          order_inserts: true
+          order_updates: true
+        generate_statistics: false
+
+  mail:
+    host: {MAIL_HOST}
+    port: {MAIL_PORT}
+    username: {MAIL_USERNAME}
+    password: {MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+
+  main:
+    allow-circular-references: true
+
+server:
+  port: 8090
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+jwt:
+  secret: {JWT_SECRET}
+  expiration:
+    refresh: {JWT_EXPIRATION}
+
+google:
+  clientId: {GOOGLE_CLIENT_ID}
+
+facebook:
+  app:
+    id: {FB_APP_ID}
+    secret: {FB_APP_SECRET}
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: ${SQL_LOG_LEVEL:WARN}
+    org.springframework.web: WARN
+    org.springframework.security: DEBUG
